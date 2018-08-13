@@ -1,0 +1,130 @@
+<div class="container">
+  <div class="col-md-12">
+    <h1>Employee List</h1>
+    <table class="table table-striped tabel-hover">
+      <thead>
+        <tr>
+          <th class="text-center">ID</th>
+          <th class="text-center">Name</th>
+          <th class="text-center">Designation</th>
+          <th class="text-right">Salary</th>
+          <th class="text-right">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td class="text-center">{{ employee.id }}</td>
+          <td class="text-center">{{ employee.name }}</td>
+          <td class="text-center">{{ employee.designation }}</td>
+          <td class="text-right">{{ employee.salary | currency:'USD':true:'1.0-2' }}</td>
+          <td class="text-right">
+            <button
+            mat-raised-button
+            color="primary"
+            (click)="showEditEmployeeForm(employee)">Edit</button>
+          <button
+          mat-raised-button
+          color="warn"
+            (click)="removeEmployee(employee)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+    mat-raised-button
+    color="accent"
+    (click)=showAddEmployeeForm()>
+    Add Employee</button>
+<br>
+
+<mat-card>
+  <form *ngIf="employeeForm">
+    <h2>Add New Employee</h2>
+    <mat-form-field>
+      <input type="text"
+      name="id"
+      [(ngModel)]="newEmployee.id"
+      placeholder="ID"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+      name="name"
+      [(ngModel)]="newEmployee.name"
+      placeholder="Name"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+      name="designation"
+      [(ngModel)]="newEmployee.designation"
+      placeholder="Designation" />
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+      name="salary"
+      [(ngModel)]="newEmployee.salary"
+      placeholder="Salary"/>
+    </mat-form-field>
+    <br>
+    <button type="button"
+    mat-raised-button
+    color="primary"
+    class="btn btn-primary"
+    (click)="saveEmployee(newEmployee)">Submit</button>
+
+    <button type="button"
+    mat-raised-button
+    color="accent"
+    class="btn btn-warning"
+    (click)="cancelNewEmployee()">Cancel</button>
+   </form>
+</mat-card>
+
+<mat-card>
+  <form *ngIf="editEmployeeForm">
+    <h2>Edit Employee Details</h2>
+    <mat-form-field>
+      <input type="text"
+      name="id"
+      [(ngModel)]="editedEmployee.id"
+      placeholder="ID"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+      name="name"
+      [(ngModel)]="editedEmployee.name"
+      placeholder="Name"/>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+      name="designation"
+      [(ngModel)]="editedEmployee.designation"
+      placeholder="Designation" />
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <input type="text"
+      name="salary"
+      [(ngModel)]="editedEmployee.salary"
+      placeholder="Salary"/>
+    </mat-form-field>
+    <br>
+    <button type="button"
+    mat-raised-button
+    color="primary"
+    class="btn btn-primary"
+    (click)="updateEmployee(editedEmployee)">Submit</button>
+
+    <button type="button"
+    mat-raised-button
+    color="accent"
+    class="btn btn-warning"
+    (click)="cancelEdits()">Cancel</button>
+   </form>
+</mat-card>
+  </div>
+</div>
